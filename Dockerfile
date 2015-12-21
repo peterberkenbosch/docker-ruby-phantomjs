@@ -1,12 +1,11 @@
 FROM ruby:2.2.4
 
-# Env
-ENV PHANTOMJS_VERSION 1.9.8
+ENV PHANTOM_JS="phantomjs-1.9.8-linux-x86_64"
 
-# Install phantomjs
-RUN mkdir -p /srv/var && \
-  wget -q --no-check-certificate -O /tmp/phantomjs-$PHANTOMJS_VERSION-linux-x86_64.tar.bz2 https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-$PHANTOMJS_VERSION-linux-x86_64.tar.bz2 && \
-  tar -xjf /tmp/phantomjs-$PHANTOMJS_VERSION-linux-x86_64.tar.bz2 -C /tmp && \
-  rm -f /tmp/phantomjs-$PHANTOMJS_VERSION-linux-x86_64.tar.bz2 && \
-  mv /tmp/phantomjs-$PHANTOMJS_VERSION-linux-x86_64/ /srv/var/phantomjs && \
-  ln -s /srv/var/phantomjs/bin/phantomjs /usr/bin/phantomjs
+RUN apt-get update && \
+    apt-get upgrade -y && \
+    apt-get install -y build-essential chrpath libssl-dev libxft-dev libfreetype6 libfreetype6-dev libfontconfig1 libfontconfig1-dev && \
+    curl -L -O https://bitbucket.org/ariya/phantomjs/downloads/$PHANTOM_JS.tar.bz2 && \
+    tar xvjf $PHANTOM_JS.tar.bz2 && \
+    mv $PHANTOM_JS /usr/local/share && \
+    ln -sf /usr/local/share/$PHANTOM_JS/bin/phantomjs /usr/local/bin
