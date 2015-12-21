@@ -1,4 +1,4 @@
-FROM ruby:2.1.5
+FROM ruby:2.2.4
 
 # Env
 ENV PHANTOMJS_VERSION 1.9.8
