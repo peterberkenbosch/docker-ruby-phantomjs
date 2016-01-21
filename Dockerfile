@@ -9,6 +9,6 @@ RUN apt-get update && \
     tar xvjf $PHANTOM_JS.tar.bz2 && \
     mv $PHANTOM_JS /usr/local/share && \
     ln -sf /usr/local/share/$PHANTOM_JS/bin/phantomjs /usr/local/bin && \
-    apt-get install npm && \
+    apt-get -y install npm && \
     ln -s /usr/bin/nodejs /usr/bin/node && \
     npm install -g grunt-cli
